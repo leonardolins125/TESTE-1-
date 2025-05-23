@@ -1,0 +1,65 @@
+# Gera um site de receitas HTML
+html_code = """
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>🍽️ Gerador de Receitas</title>
+  <style>
+    body { font-family: Arial; background: #fdf6e3; text-align: center; padding: 40px; }
+    h1 { color: #cb4b16; }
+    button {
+      padding: 10px 20px; font-size: 16px; background-color: #859900;
+      color: white; border: none; border-radius: 5px; cursor: pointer;
+    }
+    button:hover { background-color: #657b83; }
+    .receita {
+      background: #fff; padding: 20px; margin: 20px auto; width: 80%;
+      max-width: 600px; border-radius: 10px; box-shadow: 0 0 10px #ccc;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <h1>🍲 Gerador de Receitas Aleatórias</h1>
+  <button onclick="mostrarReceita()">Gerar Receita</button>
+  <div class="receita" id="receita"></div>
+  <script>
+    const receitas = [
+      {
+        nome: "Arroz de Forno",
+        ingredientes: ["2 xícaras de arroz cozido", "1 lata de milho", "200g de presunto", "200g de queijo", "1 lata de creme de leite"],
+        preparo: "Misture tudo, leve ao forno com queijo por cima por 20 min a 180°C."
+      },
+      {
+        nome: "Bolo de Cenoura",
+        ingredientes: ["3 cenouras", "4 ovos", "1 xícara de óleo", "2 xícaras de açúcar", "2 xícaras de farinha", "1 colher de fermento"],
+        preparo: "Bata tudo no liquidificador e asse por 40 min a 180°C."
+      },
+      {
+        nome: "Macarrão ao Alho e Óleo",
+        ingredientes: ["200g de macarrão", "3 dentes de alho", "2 colheres de azeite", "Sal", "Salsinha"],
+        preparo: "Cozinhe o macarrão, frite o alho no azeite e misture."
+      }
+    ];
+    function mostrarReceita() {
+      const r = receitas[Math.floor(Math.random() * receitas.length)];
+      document.getElementById('receita').innerHTML = `
+        <h2>${r.nome}</h2>
+        <h4>Ingredientes:</h4>
+        <ul>${r.ingredientes.map(i => `<li>${i}</li>`).join('')}</ul>
+        <h4>Modo de Preparo:</h4>
+        <p>${r.preparo}</p>`;
+    }
+  </script>
+</body>
+</html>
+"""
+
+# Salva como arquivo HTML
+with open("receita_automatica.html", "w") as f:
+    f.write(html_code)
+
+# Baixa o arquivo
+from google.colab import files
+files.download("receita_automatica.html")
